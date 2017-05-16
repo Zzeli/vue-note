@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="vue.js"></script>
+    <link rel="stylesheet" href="index.css">
+</head>
+<script>
+
+</script>
+<body>
+<div id="el" v-on:dblclick.ctrl.prevent="addnotes"
+     @mousemove="mv"
+     @mouseup="mu"
+>
+    <div class="header">
+        <div class="content">
+            <div :class="`note ${v.bg} ${i===moveEvent.index?'active':''}`" v-for="(v,i) in cons" :style="{top:v.top + 'px',left:v.left + 'px'}"
+                 :key="v.id">
+                <div class="title"
+                     @mousedown.stop.prevent="md(i,$event)"
+                >
+                    {{v.title}}
+
+                    <div class="delete" v-on:click.stop.prevent="shift(i)">
+                        x
+                    </div>
+                </div>
+                <div class="content">
+                    <textarea @blur="save" v-model="v.content" @keyup.stop></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script src="index.js"></script>
